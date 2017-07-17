@@ -7,5 +7,7 @@ Just a twitter tool, in order to fetch certain leak information and parse for ke
 * https://twitter.com/BotChangePasswd
 * https://twitter.com/DataLeakBot
 
+You should add these accounts to a list and use the list ID for the bot.
+
 # Notes
 Please adjust the twitter information, keywords list and the list ID
