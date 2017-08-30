@@ -14,9 +14,16 @@ outfile = open("Leaktweets.txt","a")
 keywords = ["example.com", "Mickey Mouse"]
 
 def hibp_verify(email):
-    r= requests.get("https://haveibeenpwned.com/api/v2/breachedaccount/%s" % email)
-    data = json.loads(r.text)
-    return "%s - %s" % (data[0]['Domain'], data[0]['IsVerified'])
+        retstr = ""
+        APIendpoints = ["https://haveibeenpwned.com/api/v2/breachedaccount/%s", "https://haveibeenpwned.com/api/v2/pasteaccount/%s"]
+        for URL in APIendpoints:
+                r = requests.get(URL % email)
+                if not r.status_code == 404:
+                        data = json.loads(r.text)
+                        for item in data:
+                                retstr += "%s - %s\n" % (item['Title'], item['IsVerified'])
+                        print(retstr)
+        return retstr
 
 for item in api.GetListTimeline("MYID"):
         try:
