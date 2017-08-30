@@ -13,6 +13,10 @@ outfile = open("Leaktweets.txt","a")
 
 keywords = ["example.com", "Mickey Mouse"]
 
+def hibp_verify(email):
+    r= requests.get("https://haveibeenpwned.com/api/v2/breachedaccount/%s" % email)
+    data = json.loads(r.text)
+    return "%s - %s" % (data[0]['Domain'], data[0]['IsVerified'])
 
 for item in api.GetListTimeline("MYID"):
         try:
